@@ -52,4 +52,37 @@ public class MinAndMaxArrayTests {
         }
         return numbers.length - 1;
     }
+
+    //Homework
+    @Test
+    void findSecondMaxIndexTest() {
+        Assertions.assertEquals(3, findSecondMaxIndex(numbers1));
+        Assertions.assertEquals(4, findSecondMaxIndex(numbers2));
+        Assertions.assertEquals(-1, findSecondMaxIndex(numbers3));
+        Assertions.assertEquals(0, findSecondMaxIndex(numbers4));
+        Assertions.assertEquals(-1, findSecondMaxIndex(numbers5));
+    }
+
+    public static int findSecondMaxIndex(int[] numbers) {
+        if (numbers == null || numbers.length < 2) {
+            return -1;
+        }
+
+        int maxIndex = -1, secondMaxIndex = -1;
+        int maxValue = Integer.MIN_VALUE, secondMaxValue = Integer.MIN_VALUE;
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > maxValue) {
+                secondMaxValue = maxValue;
+                secondMaxIndex = maxIndex;
+                maxValue = numbers[i];
+                maxIndex = i;
+            } else if (numbers[i] > secondMaxValue && numbers[i] != maxValue) {
+                secondMaxValue = numbers[i];
+                secondMaxIndex = i;
+            }
+        }
+
+        return secondMaxIndex;
+    }
 }

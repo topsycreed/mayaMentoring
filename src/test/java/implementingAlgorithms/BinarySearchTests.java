@@ -30,4 +30,31 @@ public class BinarySearchTests {
         }
         return -1; // the element is not found
     }
+
+    //Homework
+    public static int binarySearchRecursive(int[] array, int left, int right, int value) {
+        if (left > right) {
+            return -1;
+        }
+
+        int mid = left + (right - left) / 2;
+
+        if (array[mid] == value) {
+            return mid;
+        } else if (array[mid] > value) {
+            return binarySearchRecursive(array, left, mid - 1, value);
+        } else {
+            return binarySearchRecursive(array, mid + 1, right, value);
+        }
+    }
+
+    @Test
+    void binarySearchRecursiveTest() {
+        int[] array = { 10, 13, 19, 20, 24, 26, 30, 34, 35 }; //should be sorted!
+        int left = 0, right = array.length - 1;
+        Assertions.assertEquals(Arrays.binarySearch(array, left, right,10), binarySearchRecursive(array,  left, right, 10));
+        Assertions.assertEquals(Arrays.binarySearch(array, left, right,24), binarySearchRecursive(array,  left, right, 24));
+        Assertions.assertEquals(Arrays.binarySearch(array, left, right,34), binarySearchRecursive(array,  left, right, 34));
+        Assertions.assertEquals(-1, binarySearchRecursive(array,  left, right, 14));
+    }
 }

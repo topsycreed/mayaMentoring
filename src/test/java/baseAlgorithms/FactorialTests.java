@@ -15,12 +15,14 @@ public class FactorialTests {
     }
 
     private static long factorialUsingRecursion(int n) {
+        if (n < 0) {
+            throw new RuntimeException("Use positive numbers!");
+        }
         if (n <= 1) {
             return 1;
         }
         return n * factorialUsingRecursion(n - 1);
     }
-
     private static long factorialUsingForLoop(int n) {
         long fact = 1;
         for (int i = 2; i <= n; i++) {
